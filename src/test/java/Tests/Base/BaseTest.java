@@ -6,19 +6,17 @@ package Tests.Base;
  * and open the template in the editor.
  */
 
-import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.BrowserMobProxyServer;
-import net.lightbody.bmp.client.ClientUtil;
-import net.lightbody.bmp.proxy.auth.AuthType;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 /**
  *
@@ -27,13 +25,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class BaseTest {
     protected WebDriver driver;
     
-    private BrowserMobProxy proxy;
-    
-    private final String host = "timetrack";
+    private final String url;
     private final String username = "ninak";
     private final String password = "yS4p97JSZbVMfcxW";
     
-    public BaseTest() {
+    public BaseTest() throws FileNotFoundException, IOException {
+        Properties props = new Properties();
+        props.load(new FileInputStream(new File("")));
+        url = props.getProperty("TIMETRACK_MAIN_URL");
     }
     
     @BeforeClass
@@ -48,25 +47,12 @@ public class BaseTest {
     
     @Before
     public void setUp() {
-        proxy = new BrowserMobProxyServer();
-        proxy.start(0);
-        proxy.autoAuthorization(host,username,password, AuthType.BASIC);
-        driver = new ChromeDriver(getCapabilities());
+        driver = new ChromeDriver();
     }
     
     @After
     public void tearDown() {
-        proxy.stop();
         //driver.quit();
     }
     
-    private DesiredCapabilities getCapabilities(){
-        Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
-        
-        return capabilities;
-    }
-
 }
