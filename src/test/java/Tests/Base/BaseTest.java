@@ -6,11 +6,9 @@ package Tests.Base;
  * and open the template in the editor.
  */
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import helpers.TestProperties;
 import java.io.IOException;
-import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,20 +22,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
  */
 public class BaseTest {
     protected WebDriver driver;
-    
-    private final String url;
-    private final String username = "ninak";
-    private final String password = "yS4p97JSZbVMfcxW";
-    
-    public BaseTest() throws FileNotFoundException, IOException {
-        Properties props = new Properties();
-        props.load(new FileInputStream(new File("")));
-        url = props.getProperty("TIMETRACK_MAIN_URL");
-    }
+
+    protected static TestProperties props;
+
     
     @BeforeClass
-    public static void setUpClass() {
-       
+    public static void setUpClass() throws IOException {
+        props = new TestProperties();
     }
     
     @AfterClass
@@ -48,11 +39,13 @@ public class BaseTest {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(props.SELENIUM_IMPLICIT_TIMEOUT_MSEC,TimeUnit.MILLISECONDS);
     }
     
     @After
     public void tearDown() {
-        //driver.quit();
+       // driver.quit();
+       //driver = null;
     }
-    
+        
 }

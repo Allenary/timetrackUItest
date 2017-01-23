@@ -14,7 +14,7 @@ public class TestProperties {
     public final String BASE_URL;
     public final String ADMIN_LOGIN;
     public final String ADMIN_PASSWORD;
-    public final int ROBOT_TIMEOUT_MSEC;
+    
     public final int SELENIUM_IMPLICIT_TIMEOUT_MSEC;
     public final int SELENIUM_EXPLICIT_TIMEOUT_MSEC; 
     
@@ -28,7 +28,6 @@ public class TestProperties {
         BASE_URL = props.getProperty("TIMETRACK_MAIN_URL");
         ADMIN_LOGIN = props.getProperty("ADMIN_LOGIN");
         ADMIN_PASSWORD = props.getProperty("ADMIN_PASSWORD");
-        ROBOT_TIMEOUT_MSEC = Integer.valueOf(props.getProperty("ROBOT_TIMEOUT_MSEC"));
         SELENIUM_IMPLICIT_TIMEOUT_MSEC = Integer.valueOf(props.getProperty("SELENIUM_IMPLICIT_TIMEOUT_MSEC"));
         SELENIUM_EXPLICIT_TIMEOUT_MSEC = Integer.valueOf(props.getProperty("SELENIUM_EXPLICIT_TIMEOUT_MSEC"));
     }

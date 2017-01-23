@@ -5,6 +5,7 @@
  */
 package helpers;
 
+import java.awt.AWTException;
 import java.awt.Robot;
 import static java.awt.event.KeyEvent.*;
 /**
@@ -14,6 +15,10 @@ import static java.awt.event.KeyEvent.*;
 public class RobotHelper {
     private final Robot robot;
 
+    public RobotHelper() throws AWTException{
+        this(new Robot());
+    }
+    
     public RobotHelper(Robot robot){
         this.robot = robot;
     }
