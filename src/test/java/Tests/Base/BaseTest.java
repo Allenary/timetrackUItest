@@ -6,7 +6,9 @@ package Tests.Base;
  * and open the template in the editor.
  */
 
+import Pages.BasicAuth;
 import helpers.TestProperties;
+import java.awt.AWTException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
@@ -25,7 +27,12 @@ public class BaseTest {
 
     protected static TestProperties props;
 
-    
+    public void login(String username, String password) throws AWTException{
+        new BasicAuth(driver).login(props.BASE_URL, username, password);
+    }
+    public void loginAsAdmin() throws AWTException{
+        login(props.ADMIN_LOGIN, props.ADMIN_PASSWORD);
+    }
     @BeforeClass
     public static void setUpClass() throws IOException {
         props = new TestProperties();

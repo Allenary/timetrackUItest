@@ -22,13 +22,15 @@ public class LeftNavigationPane  extends AbstractPageComponent{
     WebElement navigationTreeBtn;
     @FindBy(id = "navigation-tree")
     WebElement navigationTree;
-//    @FindBy(className = "dynatree-title")
-//    List<WebElement> menuItems;
+    @FindBy(linkText = "My Tasks")
+    WebElement menuItems;
     
     public LeftNavigationPane(WebDriver driver) {
         super(driver);
     }
-    
+    public String getTextOfActiveMenuItem(){
+        return driver.findElement(By.className("dynatree-active")).getText();
+    }
     public void openLeftMenu(){
         navigationTreeBtn.click();
     }

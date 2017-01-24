@@ -15,11 +15,11 @@ import org.openqa.selenium.support.FindBy;
  */
 public class Header extends AbstractPageComponent{
     @FindBy(id = "curWeekDateRange")
-    WebElement currentWeek;
+    private WebElement currentWeek;
     @FindBy(id = "curMonthDateRange")
-    WebElement currentMonth;
+    private WebElement currentMonth;
     @FindBy(id = "curWeekDateRange")
-    WebElement customDateRange;
+    private WebElement customDateRange;
     
     
     public Header(WebDriver driver) {
